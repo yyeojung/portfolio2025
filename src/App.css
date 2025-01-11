@@ -1,0 +1,254 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../src/assets/fonts/NotoSans-ExtraLight.ttf') format('ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../src/assets/fonts/NotoSans-Regular.ttf') format('ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../src/assets/fonts/NotoSans-SemiBold.ttf') format('ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../src/assets/fonts/NotoSans-Bold.ttf') format('ttf');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../src/assets/fonts/Silkscreen-Regular.ttf') format('ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../src/assets/fonts/Silkscreen-Bold.ttf') format('ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Geo';
+  src: url('../src/assets/fonts/Geo-Regular.ttf') format('ttf');
+  font-weight: 400;
+}
+
+/* reset */
+html {
+  font-size: 7px;
+}
+@media all and (min-width: 280px) {
+  html {
+    font-size: 7.777px;
+  }
+}
+@media all and (min-width: 290px) {
+  html {
+    font-size: 8.055px;
+  }
+}
+@media all and (min-width: 300px) {
+  html {
+    font-size: 8.333px;
+  }
+}
+@media all and (min-width: 310px) {
+  html {
+    font-size: 8.611px;
+  }
+}
+@media all and (min-width: 320px) {
+  html {
+    font-size: 9.166px;
+  }
+}
+@media all and (min-width: 330px) {
+  html {
+    font-size: 9.166px;
+  }
+}
+@media all and (min-width: 340px) {
+  html {
+    font-size: 9.444px;
+  }
+}
+@media all and (min-width: 350px) {
+  html {
+    font-size: 9.722px;
+  }
+}
+@media all and (min-width: 360px) {
+  html {
+    font-size: 10px;
+  }
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body * {
+  box-sizing: border-box;
+}
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+blockquote,
+pre,
+code,
+address,
+ul,
+ol,
+li,
+menu,
+nav,
+section,
+article,
+aside,
+dl,
+dt,
+dd,
+table,
+thead,
+tbody,
+tfoot,
+label,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+hr,
+input,
+button,
+textarea,
+object,
+figure,
+figcaption {
+  margin: 0;
+  padding: 0;
+}
+body {
+  -webkit-text-size-adjust: none;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+body.fixed {
+  overflow-y: hidden;
+}
+body,
+input,
+select,
+textarea,
+button,
+pre {
+  border: none;
+  font-size: 1.6rem;
+  color: #fff;
+  font-family: NotoSans, sans-serif;
+}
+ul,
+ol,
+li {
+  list-style-type: none;
+}
+table {
+  border-spacing: 0;
+}
+img,
+fieldset {
+  border: 0;
+}
+address,
+cite,
+code {
+  font-style: normal;
+  font-weight: normal;
+}
+em,
+i {
+  font-style: normal;
+}
+label,
+img,
+input,
+select,
+textarea,
+button {
+  vertical-align: middle;
+  outline: none;
+}
+.hide,
+legend {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  border: 0;
+  width: 0.1rem;
+  height: 0.1rem;
+  clip: rect(0.1rem, 0.1rem, 0.1rem, 0.1rem);
+}
+hr {
+  display: none;
+}
+main,
+header,
+section,
+nav,
+footer,
+aside,
+article,
+figure {
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+  background-color: transparent;
+  font-weight: 400;
+}
+pre {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+/* 스크롤바 */
+.scroll {
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a2a2a2;
+}
+
+.main_font {
+  font-family: Silkscreen, sans-serif;
+}
+.sub_font {
+  font-family: Geo, sans-serif;
+}
