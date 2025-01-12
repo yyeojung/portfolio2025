@@ -246,6 +246,21 @@ pre {
   background: #a2a2a2;
 }
 
+:root {
+  --violet: #9a30ae;
+  --yellow: #ffbf00;
+  --btnShadow: 1rem 1rem 0.8rem 0 rgba(0, 0, 0, 0.4);
+}
+.d_flex {
+  display: flex;
+}
+.justify_center {
+  justify-content: center;
+}
+.gap40 {
+  gap: 4rem;
+}
+
 .main_font {
   font-family: Silkscreen, sans-serif;
 }

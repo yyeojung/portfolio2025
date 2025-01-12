@@ -1,3 +1,7 @@
+import { flexCenter } from 'assets/style/common';
+import Button from 'components/Button';
+import Monster from 'components/Monster';
+import ProgressBar from 'components/page/home/ProgressBar';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -7,6 +11,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   background: #000;
   background-image: linear-gradient(to bottom, #6a0275 10%, #040c4a 60%);
+  position: relative;
 
   .main {
     width: 100%;
@@ -26,9 +31,8 @@ const Wrapper = styled.div`
         transparent 70%,
         rgba(0, 0, 0, 0.5) 30%
       );
-
       background-size: 0.3rem 0.3rem;
-      z-index: 601;
+      z-index: 10;
       pointer-events: none;
     }
   }
@@ -86,17 +90,19 @@ const Grid = styled.div`
 `;
 
 const Logo = styled.div`
+  ${flexCenter};
+  width: 100%;
   height: 100vh;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 501;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
 
   .logo_wrap {
-    transform: scale(0);
+    padding: 8rem 0;
     text-align: center;
+    transform: scale(0);
     height: 64rem;
     width: 80%;
     border-radius: 3rem;
@@ -106,9 +112,55 @@ const Logo = styled.div`
   h1 {
     font-size: 14rem;
     letter-spacing: -1rem;
+    margin-top: 4rem;
     line-height: 10rem;
     text-shadow: 0.7rem 0.6rem 0.2rem #d62c2f;
   }
+
+  .progress {
+    width: 80%;
+    margin: 6rem auto 0;
+  }
+`;
+
+const MonsterWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  animation: move 4s infinite linear;
+
+  .monster {
+    animation: moveEyes 4s infinite linear;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translateX(-4rem);
+    }
+    50% {
+      transform: translateX(4rem);
+    }
+    100% {
+      transform: translateX(-4rem);
+    }
+  }
+  @keyframes moveEyes {
+    0%,
+    49.9% {
+      transform: scaleX(1);
+    }
+    50%,
+    100% {
+      transform: scaleX(-1);
+    }
+  }
+`;
+
+const ButtonWrap = styled.div`
+  width: 80%;
+  margin: 8rem auto 0;
+  justify-content: space-between;
+  display: flex;
 `;
 
 export default function Home() {
@@ -140,12 +192,23 @@ export default function Home() {
     <Wrapper>
       <div className='main'>
         <Grid ref={gridRef} />
-        <Logo>
-          <div ref={logoRef} className='logo_wrap'>
-            <h1 className='main_font'>PORTFOLIO</h1>
-          </div>
-        </Logo>
       </div>
+      <Logo>
+        <div ref={logoRef} className='logo_wrap'>
+          <MonsterWrap>
+            <Monster />
+            <Monster />
+            <Monster />
+          </MonsterWrap>
+          <h1 className='main_font'>PORTFOLIO</h1>
+          <ProgressBar />
+          <ButtonWrap>
+            <Button className='red' text='RESUME' />
+            <Button className='yellow' text='START' />
+            <Button className='blue' text='PROJECT' />
+          </ButtonWrap>
+        </div>
+      </Logo>
     </Wrapper>
   );
 }
