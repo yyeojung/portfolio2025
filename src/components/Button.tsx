@@ -1,9 +1,5 @@
-import styled, { css } from 'styled-components';
-
-const customBoxShadow = (insetShadow: string, bgColor?: string) => css`
-  box-shadow: ${insetShadow}, var(--btnShadow);
-  background: ${bgColor || '#f6d367'};
-`;
+import { customBoxShadow } from 'assets/style/common';
+import styled from 'styled-components';
 
 const CustomBtn = styled.button`
   height: 6rem;

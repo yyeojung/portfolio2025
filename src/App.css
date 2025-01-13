@@ -249,7 +249,10 @@ pre {
 :root {
   --violet: #9a30ae;
   --yellow: #ffbf00;
+  --red: #d80e4d;
   --btnShadow: 1rem 1rem 0.8rem 0 rgba(0, 0, 0, 0.4);
+  --textShadow: -0.2rem 0rem #000, 0rem 0.2rem #000, 0.2rem 0rem #000,
+    0rem -0.2rem #000;
 }
 .d_flex {
   display: flex;
