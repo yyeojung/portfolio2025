@@ -1,37 +1,37 @@
 @charset "utf-8";
 @font-face {
   font-family: 'NotoSans';
-  src: url('../src/assets/fonts/NotoSans-ExtraLight.ttf') format('ttf');
+  src: url('./assets/fonts/NotoSans-ExtraLight.ttf') format('truetype');
   font-weight: 300;
 }
 @font-face {
   font-family: 'NotoSans';
-  src: url('../src/assets/fonts/NotoSans-Regular.ttf') format('ttf');
+  src: url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 @font-face {
   font-family: 'NotoSans';
-  src: url('../src/assets/fonts/NotoSans-SemiBold.ttf') format('ttf');
+  src: url('./assets/fonts/NotoSans-SemiBold.ttf') format('truetype');
   font-weight: 700;
 }
 @font-face {
   font-family: 'NotoSans';
-  src: url('../src/assets/fonts/NotoSans-Bold.ttf') format('ttf');
+  src: url('./assets/fonts/NotoSans-Bold.ttf') format('truetype');
   font-weight: 800;
 }
 @font-face {
   font-family: 'Silkscreen';
-  src: url('../src/assets/fonts/Silkscreen-Regular.ttf') format('ttf');
+  src: url('./assets/fonts/Silkscreen-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 @font-face {
   font-family: 'Silkscreen';
-  src: url('../src/assets/fonts/Silkscreen-Bold.ttf') format('ttf');
+  src: url('./assets/fonts/Silkscreen-Bold.ttf') format('truetype');
   font-weight: 700;
 }
 @font-face {
   font-family: 'Geo';
-  src: url('../src/assets/fonts/Geo-Regular.ttf') format('ttf');
+  src: url('./assets/fonts/Geo-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 

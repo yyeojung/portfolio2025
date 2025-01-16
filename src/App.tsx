@@ -4,6 +4,7 @@ import Home from 'page/Home';
 import styled from 'styled-components';
 import Contents from 'page/Contents';
 import background from './assets/image/background.png';
+import Game from 'page/Game';
 
 const Wrap = styled.div`
   height: 100vh;
@@ -21,7 +22,8 @@ function App() {
   return (
     <Wrap className={pathname !== '/' ? 'sub_page' : ''}>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Game />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/contents' element={<Contents />} />
       </Routes>
     </Wrap>
