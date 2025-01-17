@@ -5,6 +5,17 @@ import enemyImageSrc from '../assets/image/rocket.png';
 import bulletSrc from '../assets/image/bullet.png';
 import { flexCenter } from 'assets/style/common';
 import { useEffect, useRef, useState } from 'react';
+import { Bullet, Enemy } from 'class/game';
+import {
+  BULLET_SIZE,
+  BULLET_SPEED,
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  ENEMY_SIZE,
+  ENEMY_SPEED,
+  ROCKET_SIZE,
+  ROCKET_SPEED
+} from 'constants/gameConstants';
 
 const GameWrap = styled.div`
   position: relative;
@@ -50,18 +61,13 @@ const GameWrap = styled.div`
 `;
 
 export default function Game() {
-  const CANVAS_WIDTH = 700;
-  const CANVAS_HEIGHT = 900;
-  const ENEMY_SPEED = 2;
-  const BULLET_SPEED = 4;
-  const ROCKET_SPEED = 5;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [enemies, setEnemies] = useState<Enemy[]>([]);
   const [bullets, setBullets] = useState<Bullet[]>([]);
   const [keysArr, setKeysArr] = useState<string[]>([]);
-  const [rocketX, setRocketX] = useState(CANVAS_WIDTH / 2 - 32);
-  const rocketY = CANVAS_HEIGHT - 64;
+  const [rocketX, setRocketX] = useState(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
+  const rocketY = CANVAS_HEIGHT - ROCKET_SIZE;
   const rocketXRef = useRef(rocketX);
   const bulletsRef = useRef(bullets);
   const enemiesRef = useRef(enemies);
@@ -69,7 +75,6 @@ export default function Game() {
 
   useEffect(() => {
     bulletsRef.current = bullets;
-    console.log(enemies, bullets);
   }, [bullets]);
 
   useEffect(() => {
@@ -84,38 +89,6 @@ export default function Game() {
     enemiesRef.current = enemies;
   }, [enemies]);
 
-  class Enemy {
-    x: number;
-    y: number;
-    speed: number;
-
-    constructor(x: number, y: number, speed: number) {
-      this.x = x;
-      this.y = y;
-      this.speed = speed;
-    }
-
-    update() {
-      this.y += this.speed;
-    }
-  }
-
-  class Bullet {
-    x: number;
-    y: number;
-    speed: number;
-
-    constructor(x: number, y: number, speed: number) {
-      this.x = x;
-      this.y = y;
-      this.speed = speed;
-    }
-
-    update() {
-      this.y -= this.speed;
-    }
-  }
-
   // 이미지 불러오기
   const loadImage = (src: string) => {
     const image = new Image();
@@ -126,7 +99,7 @@ export default function Game() {
   // 적 추가
   const addEnemy = () => {
     const newEnemy = new Enemy(
-      Math.random() * (CANVAS_WIDTH - 64),
+      Math.random() * (CANVAS_WIDTH - ENEMY_SIZE),
       0,
       ENEMY_SPEED
     );
@@ -144,7 +117,8 @@ export default function Game() {
     const newBullet = new Bullet(
       rocketXRef.current,
       CANVAS_HEIGHT,
-      BULLET_SPEED
+      BULLET_SPEED,
+      enemiesRef.current
     );
     setBullets((prev) => {
       const filterBullets = prev
@@ -183,15 +157,31 @@ export default function Game() {
 
     enemiesRef.current.forEach((enemy) => {
       enemy.update();
-      ctx.drawImage(enemyImage, enemy.x, enemy.y, 64, 64);
+      ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
     });
+    console.log(enemiesRef.current[0]);
 
     bulletsRef.current.forEach((bullet) => {
-      bullet.update();
-      ctx.drawImage(bulletImage, bullet.x, bullet.y, 40, 40);
+      if (bullet.alive) {
+        bullet.update();
+        bullet.attack(setEnemies);
+        ctx.drawImage(
+          bulletImage,
+          bullet.x,
+          bullet.y,
+          BULLET_SIZE,
+          BULLET_SIZE
+        );
+      }
     });
 
-    ctx.drawImage(userRocket, rocketXRef.current, rocketY, 64, 64);
+    ctx.drawImage(
+      userRocket,
+      rocketXRef.current,
+      rocketY,
+      ROCKET_SIZE,
+      ROCKET_SIZE
+    );
   };
 
   useEffect(() => {
@@ -220,8 +210,11 @@ export default function Game() {
         setRocketX((prev) => Math.max(prev - ROCKET_SPEED, 0)); // 왼쪽 경계선 체크
       }
       if (keysArrRef.current.includes('ArrowRight')) {
-        setRocketX((prev) => Math.min(prev + ROCKET_SPEED, CANVAS_WIDTH - 64)); // 오른쪽 경계선 체크
+        setRocketX((prev) =>
+          Math.min(prev + ROCKET_SPEED, CANVAS_WIDTH - ROCKET_SIZE)
+        ); // 오른쪽 경계선 체크
       }
+
       drawCanvas();
       requestAnimationId = window.requestAnimationFrame(onAnimation);
     };
