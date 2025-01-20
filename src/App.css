@@ -257,11 +257,20 @@ pre {
 .d_flex {
   display: flex;
 }
+.flex_column {
+  flex-direction: column;
+}
 .justify_center {
   justify-content: center;
 }
 .gap40 {
   gap: 4rem;
+}
+.gap60 {
+  gap: 6rem;
+}
+.ml_20 {
+  margin-left: 2rem;
 }
 
 .main_font {

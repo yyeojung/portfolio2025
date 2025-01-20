@@ -8,10 +8,11 @@ const Wrap = styled.div`
     margin-top: 10rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 6rem 0;
 
     li {
-      width: 50%;
+      width: 33.3333%;
       text-align: center;
 
       .tag {
@@ -67,8 +68,14 @@ export default function Contents() {
           </Link>
         </li>
         <li>
-          <Link to='/contact'>
+          <Link to='/game'>
             <Tag text='LEVEL 4' />
+            <p className='sub_font'>GAME</p>
+          </Link>
+        </li>
+        <li>
+          <Link to='/contact'>
+            <Tag text='LEVEL 5' />
             <p className='sub_font'>CONTACT</p>
           </Link>
         </li>

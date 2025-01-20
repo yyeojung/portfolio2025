@@ -8,8 +8,17 @@ const Title = styled.h1`
   text-shadow: 0.8rem 0.8rem 0.4rem rgba(0, 0, 0, 0.6);
   line-height: 8rem;
   padding-bottom: 2rem;
+
+  &.sub {
+    margin-top: 2rem;
+  }
 `;
 
-export default function SubTitle({ text }: { text: string }) {
-  return <Title className='main_font'>{text}</Title>;
+interface SubTitle {
+  text: string;
+  className?: string;
+}
+
+export default function SubTitle({ text, className }: SubTitle) {
+  return <Title className={`main_font ${className}`}>{text}</Title>;
 }
