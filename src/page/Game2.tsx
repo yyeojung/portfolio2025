@@ -1,8 +1,21 @@
 import styled from 'styled-components';
 import bgImage from '../assets/image/game_background.jpg';
-import rocketImage from '../assets/image/my_rocket.png';
+import rocketImageSrc from '../assets/image/my_rocket.png';
+import enemyImageSrc from '../assets/image/rocket.png';
+import bulletSrc from '../assets/image/bullet.png';
 import { flexCenter } from 'assets/style/common';
 import { useEffect, useRef, useState } from 'react';
+import { Bullet, Enemy } from 'class/game';
+import {
+  BULLET_SIZE,
+  BULLET_SPEED,
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  ENEMY_SIZE,
+  ENEMY_SPEED,
+  ROCKET_SIZE,
+  ROCKET_SPEED
+} from 'constants/gameConstants';
 
 const GameWrap = styled.div`
   position: relative;
@@ -47,81 +60,35 @@ const GameWrap = styled.div`
   }
 `;
 
-// class Enemy {
-//     private canvas: HTMLCanvasElement;
-//     private ctx: CanvasRenderingContext2D | null = null;
-//     private position: EnemyPos = { x: 0, y: 0 };
-
-//     constructor(canvas: HTMLCanvasElement) {
-//       this.canvas = canvas;
-//       this.ctx = this.canvas.getContext('2d');
-//       this.enemyAnimation();
-//     }
-
-//     private enemyAnimation() {
-//       this.draw();
-//       this.y -= 2;
-//       requestAnimationFrame(this.enemyAnimation.bind(this));
-//     }
-
-//     private draw() {
-//       const { x, y } = this.position;
-//       const enemyImage = loadImage('../assets/image/rocket.png');
-
-//       if (!this.ctx || !enemyImage) return;
-
-//       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-//       this.ctx.drawImage(enemyImage, x, y, 60, 60);
-//     }
-//   }
-
-// class Enemy {
-//     x: number;
-//     y: number;
-
-//     constructor({ x, y }: EnemyPos) {
-//       this.x = x;
-//       this.y = y;
-//     }
-
-//     init() {
-//       this.y = 0;
-//       this.x = enemyRandomValue(0, CANVAS_WIDTH - 60);
-//       enemyList.push(this);
-//     }
-//     update() {
-//       this.y += 2; // 속도 조절
-
-//       // if (this.y >= CANVAS_HEIGHT - 60) {
-
-//       // }
-//     }
-// }
-
 export default function Game() {
-  const CANVAS_WIDTH = 700;
-  const CANVAS_HEIGHT = 900;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [enemies, setEnemies] = useState<Enemy[]>([]);
-  const [rocketX, setRocketX] = useState(CANVAS_WIDTH / 2 - 32);
-  const rocketY = CANVAS_HEIGHT - 64;
+  const [bullets, setBullets] = useState<Bullet[]>([]);
+  const [keysArr, setKeysArr] = useState<string[]>([]);
+  const [rocketX, setRocketX] = useState(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
+  const rocketY = CANVAS_HEIGHT - ROCKET_SIZE;
+  const rocketXRef = useRef(rocketX);
+  const bulletsRef = useRef(bullets);
+  const enemiesRef = useRef(enemies);
+  const keysArrRef = useRef(keysArr);
 
-  class Enemy {
-    x: number;
-    y: number;
-    speed: number;
+  useEffect(() => {
+    bulletsRef.current = bullets;
+  }, [bullets]);
 
-    constructor(x: number, y: number, speed: number) {
-      this.x = x;
-      this.y = y;
-      this.speed = speed;
-    }
+  useEffect(() => {
+    keysArrRef.current = keysArr;
+  }, [keysArr]);
 
-    update() {
-      this.y += this.speed;
-    }
-  }
+  useEffect(() => {
+    rocketXRef.current = rocketX;
+  }, [rocketX]);
+
+  useEffect(() => {
+    enemiesRef.current = enemies;
+  }, [enemies]);
+
   // 이미지 불러오기
   const loadImage = (src: string) => {
     const image = new Image();
@@ -129,15 +96,93 @@ export default function Game() {
     return image;
   };
 
+  // 적 추가
+  const addEnemy = () => {
+    const newEnemy = new Enemy(
+      Math.random() * (CANVAS_WIDTH - ENEMY_SIZE),
+      0,
+      ENEMY_SPEED
+    );
+    setEnemies((prev) => {
+      const filterEnemies = prev
+        .filter((enemy) => enemy.y < CANVAS_HEIGHT) // 캔버스 밖으로 나가면 배열에서 삭제
+        .concat(newEnemy);
+
+      return filterEnemies;
+    });
+  };
+
+  // 총알 추가
+  const addBullet = () => {
+    const newBullet = new Bullet(
+      rocketXRef.current,
+      CANVAS_HEIGHT,
+      BULLET_SPEED,
+      enemies,
+      enemiesRef.current
+    );
+    setBullets((prev) => {
+      const filterBullets = prev
+        .filter((bullet) => bullet.y >= 0) // 캔버스 밖으로 나가면 배열에서 삭제
+        .concat(newBullet);
+
+      return filterBullets;
+    });
+  };
+
   const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      rocketX > 0 ? setRocketX((prev) => prev - 10) : setRocketX(0);
+    setKeysArr((prev) => {
+      if (!prev.includes(e.code)) {
+        return [...prev, e.code];
+      }
+      return prev; // 이미 포함된 키는 미반영
+    });
+  };
+
+  const onKeyUp = (e: KeyboardEvent) => {
+    setKeysArr((prev) => prev.filter((key) => key !== e.code));
+
+    if (e.code === 'Space') {
+      addBullet();
     }
-    if (e.key === 'ArrowRight') {
-      rocketX >= CANVAS_WIDTH - 64
-        ? setRocketX(CANVAS_WIDTH - 64)
-        : setRocketX((prev) => prev + 10);
-    }
+  };
+
+  // 이미지 그리기
+  const drawCanvas = () => {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    const userRocket = loadImage(rocketImageSrc);
+    const enemyImage = loadImage(enemyImageSrc);
+    const bulletImage = loadImage(bulletSrc);
+
+    enemiesRef.current.forEach((enemy) => {
+      enemy.update();
+      ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
+    });
+    console.log(enemies);
+
+    bulletsRef.current.forEach((bullet) => {
+      if (bullet.alive) {
+        bullet.update();
+        bullet.attack(setEnemies);
+        ctx.drawImage(
+          bulletImage,
+          bullet.x,
+          bullet.y,
+          BULLET_SIZE,
+          BULLET_SIZE
+        );
+      }
+    });
+
+    ctx.drawImage(
+      userRocket,
+      rocketXRef.current,
+      rocketY,
+      ROCKET_SIZE,
+      ROCKET_SIZE
+    );
   };
 
   useEffect(() => {
@@ -148,48 +193,45 @@ export default function Game() {
       canvas.height = CANVAS_HEIGHT;
       setCtx(context);
     }
-  }, [canvasRef]);
+  }, []);
 
   // user rocket
   useEffect(() => {
+    let lastEnemyTime = Date.now();
     let requestAnimationId: number;
-
-    const addEnemy = () => {
-      const newEnemy = new Enemy(Math.random() * (CANVAS_WIDTH - 60), 0, 2);
-      setEnemies((prev) => [...prev, newEnemy]);
-    };
 
     // 애니메이션 처리
     const onAnimation = () => {
-      const userRocket = loadImage(rocketImage);
-
-      if (ctx) {
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-        enemies.forEach((enemy) => {
-          enemy.update();
-          ctx.fillStyle = 'red';
-          ctx.fillRect(enemy.x, enemy.y, 30, 30);
-        });
-
-        // 로켓 이미지
-        ctx.drawImage(userRocket, rocketX, rocketY, 64, 64);
+      if (Date.now() - lastEnemyTime >= 1000) {
+        addEnemy();
+        lastEnemyTime = Date.now(); // 적 생성되는 시간
       }
+
+      if (keysArrRef.current.includes('ArrowLeft')) {
+        setRocketX((prev) => Math.max(prev - ROCKET_SPEED, 0)); // 왼쪽 경계선 체크
+      }
+      if (keysArrRef.current.includes('ArrowRight')) {
+        setRocketX((prev) =>
+          Math.min(prev + ROCKET_SPEED, CANVAS_WIDTH - ROCKET_SIZE)
+        ); // 오른쪽 경계선 체크
+      }
+
+      drawCanvas();
       requestAnimationId = window.requestAnimationFrame(onAnimation);
     };
-    const interval = setInterval(addEnemy, 1000);
 
     // 리퀘스트 애니메이션 초기화
     requestAnimationId = window.requestAnimationFrame(onAnimation);
     document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keyup', onKeyUp);
 
     return () => {
       // 기존 리퀘스트 애니메이션 캔슬
       window.cancelAnimationFrame(requestAnimationId);
       document.removeEventListener('keydown', onKeyDown);
-      clearInterval(interval);
+      document.removeEventListener('keyup', onKeyUp);
     };
-  }, [ctx, enemies]);
+  }, [ctx]);
 
   return (
     <GameWrap>

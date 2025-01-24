@@ -32,11 +32,19 @@ export class Enemy extends Moving {
 
 export class Bullet extends Moving {
   enemies: Enemy[];
+  enemiesRef: Enemy[];
   alive: boolean;
 
-  constructor(x: number, y: number, speed: number, enemies: Enemy[]) {
+  constructor(
+    x: number,
+    y: number,
+    speed: number,
+    enemies: Enemy[],
+    enemiesRef: Enemy[]
+  ) {
     super(x, y, speed);
     this.enemies = enemies;
+    this.enemiesRef = enemiesRef;
     this.alive = true;
   }
 
@@ -45,16 +53,20 @@ export class Bullet extends Moving {
   }
 
   attack(setEnemies: React.Dispatch<React.SetStateAction<Enemy[]>>) {
-    for (let i = 0; i < this.enemies.length; i++) {
+    for (let i = 0; i < this.enemiesRef.length; i++) {
       if (
         // 총알 위치
-        this.x >= this.enemies[i].x - ENEMY_SIZE / 2 &&
-        this.x <= this.enemies[i].x + ENEMY_SIZE - 20 &&
-        this.y >= this.enemies[i].y &&
-        this.y <= this.enemies[i].y + ENEMY_SIZE
+        this.x >= this.enemiesRef[i].x - ENEMY_SIZE / 2 &&
+        this.x <= this.enemiesRef[i].x + ENEMY_SIZE - 20 &&
+        this.y >= this.enemiesRef[i].y &&
+        this.y <= this.enemiesRef[i].y + ENEMY_SIZE
       ) {
         this.alive = false;
-        setEnemies((prev) => prev.filter((e) => e.id !== this.enemies[i].id));
+        const enemyToDelete = this.enemiesRef[i];
+        this.enemiesRef = this.enemiesRef.filter(
+          (e) => e.id !== enemyToDelete.id
+        );
+        setEnemies((prev) => prev.filter((e) => e.id !== enemyToDelete.id));
       }
     }
   }

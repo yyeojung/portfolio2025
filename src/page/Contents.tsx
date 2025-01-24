@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Wrap = styled.div`
   ul {
-    margin-top: 10rem;
+    margin-top: 16rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

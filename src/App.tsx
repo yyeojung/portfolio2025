@@ -6,6 +6,7 @@ import Contents from 'page/Contents';
 import AboutMe from 'page/AboutMe';
 import background from './assets/image/background.png';
 import Game from 'page/Game';
+import CompanyProject from 'page/CompanyProject';
 
 const Wrap = styled.div`
   min-height: 100vh;
@@ -27,6 +28,7 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/contents' element={<Contents />} />
         <Route path='/about' element={<AboutMe />} />
+        <Route path='/company-project' element={<CompanyProject />} />
       </Routes>
     </Wrap>
   );

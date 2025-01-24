@@ -13,20 +13,24 @@ const Wrap = styled.div`
   .box_wrap {
     display: flex;
     justify-content: space-between;
-    padding-top: 12rem;
-    gap: 8rem;
+    padding: 12rem 4rem 0;
+    gap: 12rem;
 
     .violet_box {
-      max-width: 80rem;
-
-      strong {
-        background: #fff;
-        color: #000;
-        padding: 0 1rem;
-      }
-
+      max-width: 70rem;
       &.hello {
         margin-top: 18rem;
+        p {
+          line-height: 2;
+        }
+      }
+      &:not(.hello) {
+        max-width: 60rem;
+        li:not(:first-child) {
+          .inner_title {
+            margin-top: 1rem;
+          }
+        }
       }
     }
   }
@@ -42,46 +46,55 @@ export default function Contents() {
       <div className='box_wrap'>
         <VioletBox className='hello' text='HELLO'>
           <p>
-            안녕하세요!
+            안녕하세요! <br />
+            꾸준한 학습과 실행력을 바탕으로 실무적으로 성장하는 퍼블리셔
+            홍여정입니다. <br />
+            저는 기존 Html, Css, Js로만 진행하던 업무에서
             <br />
-            저는 원활한 커뮤니케이션 능력과 꾸준한 학습을 바탕으로 문제를
-            해결하는 능력을 갖추고 있습니다. <br />
-            저의 장점으로는 적극적인 의사소통으로 팀원들과의 문제 없는 협업이
-            가능하며 지속적인 학습으로 문제 해결을 할 수 있도록 노력하는
-            것입니다.
+            Vue.js 프로젝트를 회사에 도입해 시작부터 완료까지 주도한 경험이
             <br />
-            코딩을 하는 것은 저에게 즐거움과 성취감을 주어 꾸준한 학습의 동기가
-            되어줍니다. 배움을 계속하고 응용함으로써 항상 최선의 결과를 위해
-            노력하겠습니다!
+            있으며, SCSS를 활용한 스타일 관리도 경험해보았습니다. 작업 시<br />
+            실용적이고 효율적인 방식을 최우선으로 고려하며 꾸준한 학습과
+            <br />
+            실행력을 통해 문제를 해결합니다. 또한 다양한 팀과의 원활한 소통으로
+            <br />
+            프로젝트의 가치를 극대화하는 것을 목표로 합니다.
           </p>
         </VioletBox>
         <div className='d_flex gap60 flex_column'>
           <VioletBox text='CAREER'>
-            <strong>(주) 유엑스스토리</strong>
+            <h3 className='inner_title'>
+              <span>(주) 유엑스스토리</span>
+            </h3>
             <p>2023.02.16 ~ 재직 중</p>
           </VioletBox>
           <VioletBox text='SKILLS'>
             <ul>
               <li>
-                <strong>Html, Css</strong>
+                <h3 className='inner_title'>
+                  <span>Html, Css, SCSS</span>
+                </h3>
                 <p>
                   JavaScript를 사용하지 않아도 충분히 구현 가능한 Html,Css를
                   활용하여 UI/UX 개선하는 것에 중점을 둡니다.
                 </p>
               </li>
               <li>
-                <strong>JavaScript, TypeScript</strong>
+                <h3 className='inner_title'>
+                  <span>JavaScript, TypeScript</span>
+                </h3>
                 <p>
                   기본적인 JavaScript를 학습했고 TypeScript를 이용해 안전하고
                   유지보수성을 높이기 위해 노력합니다.
                 </p>
               </li>
               <li>
-                <strong>React, Zustand</strong>
+                <h3 className='inner_title'>
+                  <span>React, Zustand</span>
+                </h3>
                 <p>
                   데이터 전달을 위한 props의 개념을 이해하고 활용할 수 있습니다.
-                </p>
-                <p>
+                  <br />
                   state를 효과적으로 관리하기 위해 Zustand를 사용하여 전역
                   상태관리를 경험해보았습니다.
                 </p>

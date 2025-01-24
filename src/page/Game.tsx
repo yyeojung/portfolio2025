@@ -118,6 +118,7 @@ export default function Game() {
       rocketXRef.current,
       CANVAS_HEIGHT,
       BULLET_SPEED,
+      enemies,
       enemiesRef.current
     );
     setBullets((prev) => {
@@ -159,7 +160,7 @@ export default function Game() {
       enemy.update();
       ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
     });
-    console.log(enemiesRef.current[0]);
+    console.log(enemies);
 
     bulletsRef.current.forEach((bullet) => {
       if (bullet.alive) {

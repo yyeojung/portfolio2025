@@ -8,6 +8,8 @@ const Title = styled.h1`
   text-shadow: 0.8rem 0.8rem 0.4rem rgba(0, 0, 0, 0.6);
   line-height: 8rem;
   padding-bottom: 2rem;
+  word-break: break-word;
+  line-height: 11rem;
 
   &.sub {
     margin-top: 2rem;
