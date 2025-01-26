@@ -142,6 +142,7 @@ body {
   -webkit-text-size-adjust: none;
   word-wrap: break-word;
   word-break: break-all;
+  overflow-x: hidden;
 }
 body.fixed {
   overflow-y: hidden;
@@ -269,6 +270,9 @@ pre {
 .gap60 {
   gap: 6rem;
 }
+.mt_10 {
+  margin-top: 1rem;
+}
 .ml_20 {
   margin-left: 2rem;
 }
@@ -278,4 +282,15 @@ pre {
 }
 .sub_font {
   font-family: Geo, sans-serif;
+}
+.skill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.skill span {
+  background: #fff;
+  color: #333;
+  padding: 0 0.8rem;
+  border-radius: 2.6rem;
 }

@@ -1,5 +1,9 @@
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { useEffect, useRef } from 'react';
+import TextPlugin from 'gsap/TextPlugin';
 
+gsap.registerPlugin(TextPlugin);
 const Title = styled.h1`
   color: var(--yellow);
   font-size: 14rem;
@@ -22,5 +26,15 @@ interface SubTitle {
 }
 
 export default function SubTitle({ text, className }: SubTitle) {
-  return <Title className={`main_font ${className}`}>{text}</Title>;
+  const titleRef = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline();
+
+    tl.to(titleRef.current, {
+      duration: 2,
+      text: text,
+      delay: 1
+    });
+  }, []);
+  return <Title ref={titleRef} className={`main_font ${className}`}></Title>;
 }

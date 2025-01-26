@@ -68,15 +68,15 @@ export default function Contents() {
           </Link>
         </li>
         <li>
-          <Link to='/game'>
+          <Link to='/contact'>
             <Tag text='LEVEL 4' />
-            <p className='sub_font'>GAME</p>
+            <p className='sub_font'>CONTACT</p>
           </Link>
         </li>
         <li>
-          <Link to='/contact'>
+          <Link to='/game'>
             <Tag text='LEVEL 5' />
-            <p className='sub_font'>CONTACT</p>
+            <p className='sub_font'>GAME</p>
           </Link>
         </li>
       </ul>
