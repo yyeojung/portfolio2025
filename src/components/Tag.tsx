@@ -2,7 +2,7 @@ import { customBoxShadow } from 'assets/style/common';
 import styled from 'styled-components';
 
 const CustomTag = styled.div`
-  width: fit-content;
+  width: max-content;
   height: 6rem;
   border-radius: 3rem;
   font-size: 3.2rem;
@@ -16,11 +16,11 @@ const CustomTag = styled.div`
   border: 0.2rem solid #ffbf00;
 
   &.red {
-    min-width: 200px;
+    min-width: 20rem;
     background: var(--red);
   }
   &.yellow {
-    min-width: 200px;
+    min-width: 20rem;
     background: var(--yellow);
     border-color: var(--red);
   }

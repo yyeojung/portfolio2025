@@ -1,9 +1,10 @@
-import { flexCenter } from 'assets/style/common';
+import { breakPad, breakMobile, flexCenter } from 'assets/style/common';
 import Button from 'components/Button';
 import Monster from 'components/Monster';
 import ProgressBar from 'components/page/home/ProgressBar';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -107,6 +108,14 @@ const Logo = styled.div`
     width: 80%;
     border-radius: 3rem;
     border: 0.5rem solid #fff;
+
+    @media (max-width: ${breakPad}) {
+      width: calc(100% - 8rem);
+      height: calc(100vh - 40rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   h1 {
@@ -115,6 +124,10 @@ const Logo = styled.div`
     margin-top: 4rem;
     line-height: 10rem;
     text-shadow: 0.7rem 0.6rem 0.2rem #d62c2f;
+
+    @media (max-width: ${breakMobile}) {
+      font-size: 10rem;
+    }
   }
 
   .progress {
@@ -161,6 +174,14 @@ const ButtonWrap = styled.div`
   margin: 8rem auto 0;
   justify-content: space-between;
   display: flex;
+
+  @media (max-width: ${breakMobile}) {
+    flex-direction: column;
+    gap: 2rem;
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export default function Home() {
@@ -203,9 +224,19 @@ export default function Home() {
           <h1 className='main_font'>PORTFOLIO</h1>
           <ProgressBar />
           <ButtonWrap>
-            <Button className='red' text='RESUME' />
-            <Button className='yellow' text='START' />
-            <Button className='blue' text='PROJECT' />
+            <Button className='red' text='RESUME'>
+              <a
+                href='https://distinct-feels-7f8.notion.site/1b9f7bfe6bfd4e27846b77f275be8ba6?pvs=74'
+                target='_blank'
+                rel='noopener noreferrer'
+              ></a>
+            </Button>
+            <Button className='yellow' text='START'>
+              <Link to='/contents'></Link>
+            </Button>
+            <Button className='blue' text='PROJECT'>
+              <Link to='/company-project'></Link>
+            </Button>
           </ButtonWrap>
         </div>
       </Logo>

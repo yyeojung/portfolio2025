@@ -54,8 +54,7 @@ const Wrap = styled.div`
     }
   }
   a:hover {
-    transition: all ease-in 0.3s;
-    transform: scale(102%);
+    background: var(--red);
   }
 `;
 interface BoxProps {

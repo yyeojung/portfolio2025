@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import VioletBox from 'components/VioletBox';
 import lgdms from '../assets/image/lgdms.png';
 import highlearning from '../assets/image/highlearning.png';
+import { Link } from 'react-router-dom';
 
 const Wrap = styled.div`
   .box_wrap {
@@ -15,14 +16,22 @@ const Wrap = styled.div`
       width: calc((100% - 8rem) / 3);
     }
   }
+
+  .title {
+    display: flex;
+    .sub {
+      margin: -2rem 0 0 2rem;
+    }
+  }
 `;
 
 export default function CompanyProject() {
   return (
     <Wrap>
+      <Link className='next_link' to='/toy-project'></Link>
       <div className='title'>
         <Tag className='red ml_20' text='LEVEL 2' />
-        <SubTitle className='sub' text='COMPANY PROJECT' />
+        <SubTitle className='sub' text='PROJECT' />
       </div>
       <div className='box_wrap'>
         <VioletBox text='LGU+ DMS, CAS BO' link='https://www.google.com'>

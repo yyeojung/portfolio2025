@@ -9,6 +9,7 @@ import Game from 'page/Game';
 import CompanyProject from 'page/CompanyProject';
 import ToyProject from 'page/ToyProject';
 import Menu from 'components/Menu';
+import Contact from 'page/Contact';
 
 const Wrap = styled.div`
   min-height: 100vh;
@@ -28,12 +29,13 @@ function App() {
     <Wrap className={notHome ? 'sub_page' : ''}>
       <Menu notHome={notHome} />
       <Routes>
-        <Route path='/' element={<Game />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/contents' element={<Contents />} />
         <Route path='/about' element={<AboutMe />} />
         <Route path='/company-project' element={<CompanyProject />} />
         <Route path='/toy-project' element={<ToyProject />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/game' element={<Game />} />
       </Routes>
     </Wrap>
   );

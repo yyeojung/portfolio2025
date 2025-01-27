@@ -33,7 +33,7 @@ export default function SubTitle({ text, className }: SubTitle) {
     tl.to(titleRef.current, {
       duration: 2,
       text: text,
-      delay: 1
+      delay: 0
     });
   }, []);
   return <Title ref={titleRef} className={`main_font ${className}`}></Title>;

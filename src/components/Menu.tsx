@@ -12,6 +12,11 @@ const NavMenu = styled.div`
     width: 6rem;
     height: 6rem;
     background: url(${imgMenu}) no-repeat;
+    background-size: 100% 100%;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   .btn_close {
     position: absolute;
@@ -32,7 +37,8 @@ const NavMenu = styled.div`
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
     box-shadow: var(--btnShadow);
-    width: 28rem;
+    width: 36rem;
+    z-index: 20;
     animation: aniMenu 0.2s linear forwards;
     &.close {
       animation: aniMenuClose 0.2s linear forwards;
@@ -43,9 +49,9 @@ const NavMenu = styled.div`
       li a {
         display: block;
         width: 100%;
-        height: 4rem;
-        line-height: 4rem;
-        font-size: 2.2rem;
+        height: 6rem;
+        line-height: 6rem;
+        font-size: 2.8rem;
         font-family: Geo, sans-serif;
 
         i {
@@ -65,7 +71,7 @@ const NavMenu = styled.div`
 
   @keyframes aniMenu {
     0% {
-      right: -30rem;
+      right: -40rem;
     }
     100% {
       right: -6rem;
@@ -76,7 +82,7 @@ const NavMenu = styled.div`
       right: -6rem;
     }
     100% {
-      right: -30rem;
+      right: -40rem;
     }
   }
 `;

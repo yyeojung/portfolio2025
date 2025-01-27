@@ -1,3 +1,4 @@
+import Glitter from 'components/Giltter';
 import SubTitle from 'components/SubTitle';
 import Tag from 'components/Tag';
 import { Link } from 'react-router-dom';
@@ -40,6 +41,11 @@ export default function Contents() {
   return (
     <Wrap>
       <SubTitle text='CONTENTS' />
+      <Link className='next_link' to='/about'></Link>
+      <Glitter type='type2' left={4} top={16} />
+      <Glitter type='type1' right={0} />
+      {/* <Glitter type='type1' />
+      <Glitter type='type5' bottom={10} /> */}
       <ul>
         <li>
           <Link to='/about'>

@@ -1,4 +1,5 @@
 import { customBoxShadow } from 'assets/style/common';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const CustomBtn = styled.button`
@@ -12,6 +13,13 @@ const CustomBtn = styled.button`
   position: relative;
   ${customBoxShadow('inset -0.4rem -0.6rem 0rem 0rem #ffb300')}
 
+  a {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
   &::before,
   &::after {
     position: absolute;
@@ -63,6 +71,7 @@ interface ButtonProps {
   width?: string;
   className?: string;
   color?: string;
+  children?: ReactNode;
 }
 
 export default function Button({
@@ -70,7 +79,8 @@ export default function Button({
   height,
   width,
   className,
-  color
+  color,
+  children
 }: ButtonProps) {
   return (
     <CustomBtn
@@ -78,6 +88,7 @@ export default function Button({
       style={{ width: width, height: height, background: color }}
     >
       {text}
+      {children}
     </CustomBtn>
   );
 }
