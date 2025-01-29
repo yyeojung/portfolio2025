@@ -1,5 +1,4 @@
-import { ENEMY_SIZE } from 'constants/gameConstants';
-let enemyCounter = 0;
+import { CANVAS_HEIGHT, ENEMY_SIZE } from 'constants/gameConstants';
 
 class Moving {
   x: number;
@@ -18,55 +17,66 @@ class Moving {
 }
 
 export class Enemy extends Moving {
-  id: string;
+  alive: boolean;
+  gameOver: boolean;
+
   constructor(x: number, y: number, speed: number) {
     super(x, y, speed);
-    enemyCounter += 1;
-    this.id = `enemy${enemyCounter}`;
+    this.alive = true;
+    this.gameOver = false;
   }
 
   update() {
-    super.update();
+    if (this.alive) {
+      super.update();
+
+      if (this.y >= CANVAS_HEIGHT) {
+        this.gameOver = true;
+      }
+    }
   }
 }
 
 export class Bullet extends Moving {
-  enemies: Enemy[];
   enemiesRef: Enemy[];
   alive: boolean;
+  onUpdateScore: () => void;
 
   constructor(
     x: number,
     y: number,
     speed: number,
-    enemies: Enemy[],
-    enemiesRef: Enemy[]
+    enemiesRef: Enemy[],
+    onUpdateScore: () => void
   ) {
     super(x, y, speed);
-    this.enemies = enemies;
     this.enemiesRef = enemiesRef;
     this.alive = true;
+    this.onUpdateScore = onUpdateScore;
   }
 
   update() {
     this.y -= this.speed;
   }
 
-  attack(setEnemies: React.Dispatch<React.SetStateAction<Enemy[]>>) {
+  attack() {
+    if (!this.alive) return;
     for (let i = 0; i < this.enemiesRef.length; i++) {
-      if (
-        // 총알 위치
-        this.x >= this.enemiesRef[i].x - ENEMY_SIZE / 2 &&
-        this.x <= this.enemiesRef[i].x + ENEMY_SIZE - 20 &&
-        this.y >= this.enemiesRef[i].y &&
-        this.y <= this.enemiesRef[i].y + ENEMY_SIZE
-      ) {
-        this.alive = false;
-        const enemyToDelete = this.enemiesRef[i];
-        this.enemiesRef = this.enemiesRef.filter(
-          (e) => e.id !== enemyToDelete.id
-        );
-        setEnemies((prev) => prev.filter((e) => e.id !== enemyToDelete.id));
+      const enemy = this.enemiesRef[i];
+
+      if (enemy.alive) {
+        if (
+          // 총알 위치
+          this.x >= enemy.x - ENEMY_SIZE / 2 &&
+          this.x <= enemy.x + ENEMY_SIZE - 20 &&
+          this.y >= enemy.y &&
+          this.y <= enemy.y + ENEMY_SIZE
+        ) {
+          this.alive = false;
+          enemy.alive = false;
+          this.enemiesRef = this.enemiesRef.filter((e) => e.alive);
+          this.onUpdateScore();
+        }
       }
     }
   }

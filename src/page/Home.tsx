@@ -146,7 +146,7 @@ const MonsterWrap = styled.div`
   animation: move 4s infinite linear;
 
   .monster {
-    animation: moveEyes 4s infinite linear;
+    animation: moveReverse 4s infinite linear;
   }
 
   @keyframes move {
@@ -160,7 +160,7 @@ const MonsterWrap = styled.div`
       transform: translateX(-4rem);
     }
   }
-  @keyframes moveEyes {
+  @keyframes moveReverse {
     0%,
     49.9% {
       transform: scaleX(1);

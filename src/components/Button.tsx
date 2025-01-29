@@ -72,6 +72,7 @@ interface ButtonProps {
   className?: string;
   color?: string;
   children?: ReactNode;
+  onClick?: () => void;
 }
 
 export default function Button({
@@ -80,10 +81,12 @@ export default function Button({
   width,
   className,
   color,
-  children
+  children,
+  onClick
 }: ButtonProps) {
   return (
     <CustomBtn
+      onClick={onClick}
       className={`main_font ${className || ''}`}
       style={{ width: width, height: height, background: color }}
     >

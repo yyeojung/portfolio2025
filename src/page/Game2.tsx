@@ -3,7 +3,7 @@ import bgImage from '../assets/image/game_background.jpg';
 import rocketImageSrc from '../assets/image/my_rocket.png';
 import enemyImageSrc from '../assets/image/rocket.png';
 import bulletSrc from '../assets/image/bullet.png';
-import { flexCenter } from 'assets/style/common';
+import { breakMobile, flexCenter } from 'assets/style/common';
 import { useEffect, useRef, useState } from 'react';
 import { Bullet, Enemy } from 'class/game';
 import {
@@ -60,6 +60,25 @@ const GameWrap = styled.div`
   }
 `;
 
+const OnlyPc = styled.div`
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+
+  @media (max-width: ${breakMobile}) {
+    display: flex;
+    word-break: keep-all;
+    text-align: center;
+  }
+`;
+
 export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
@@ -72,6 +91,7 @@ export default function Game() {
   const bulletsRef = useRef(bullets);
   const enemiesRef = useRef(enemies);
   const keysArrRef = useRef(keysArr);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     bulletsRef.current = bullets;
@@ -118,8 +138,9 @@ export default function Game() {
       rocketXRef.current,
       CANVAS_HEIGHT,
       BULLET_SPEED,
-      enemies,
-      enemiesRef.current
+      // enemies,
+      enemiesRef.current,
+      onUpdateScore
     );
     setBullets((prev) => {
       const filterBullets = prev
@@ -128,6 +149,10 @@ export default function Game() {
 
       return filterBullets;
     });
+  };
+  // 점수 업데이트
+  const onUpdateScore = () => {
+    setScore(score + 1);
   };
 
   const onKeyDown = (e: KeyboardEvent) => {
@@ -165,7 +190,7 @@ export default function Game() {
     bulletsRef.current.forEach((bullet) => {
       if (bullet.alive) {
         bullet.update();
-        bullet.attack(setEnemies);
+        bullet.attack();
         ctx.drawImage(
           bulletImage,
           bullet.x,
@@ -235,6 +260,7 @@ export default function Game() {
 
   return (
     <GameWrap>
+      <OnlyPc>모바일 해상도에서는 지원하지 않습니다.</OnlyPc>
       <div className='game_canvas'>
         <p className='score main_font'>
           SCORE: <span className='num'></span>

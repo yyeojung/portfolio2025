@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import bgImage from '../assets/image/game_background.jpg';
-import rocketImageSrc from '../assets/image/my_rocket.png';
-import enemyImageSrc from '../assets/image/rocket.png';
-import bulletSrc from '../assets/image/bullet.png';
-import { breakMobile, flexCenter } from 'assets/style/common';
+import imgBackground from '../assets/image/game_background.jpg';
+import imgMyRocket from '../assets/image/my_rocket.png';
+import imgEnemy from '../assets/image/rocket.png';
+import imgBullet from '../assets/image/bullet.png';
+import imgGameOver from '../assets/image/gameover.png';
+import imgWin from '../assets/image/you_win.png';
+import imgKeyArrow from '../assets/image/key_arrow.png';
+import imgKeySpace from '../assets/image/key_space.png';
+import { absolute, breakMobile, flexCenter } from 'assets/style/common';
 import { useEffect, useRef, useState } from 'react';
 import { Bullet, Enemy } from 'class/game';
 import {
@@ -16,6 +20,8 @@ import {
   ROCKET_SIZE,
   ROCKET_SPEED
 } from 'constants/gameConstants';
+import Button from 'components/Button';
+import { Link } from 'react-router-dom';
 
 const GameWrap = styled.div`
   position: relative;
@@ -23,7 +29,7 @@ const GameWrap = styled.div`
 
   &::before {
     content: '';
-    background: url(${bgImage}) no-repeat center/cover fixed;
+    background: url(${imgBackground}) no-repeat center/cover fixed;
     filter: blur(1rem);
     width: 100%;
     height: 100%;
@@ -34,29 +40,72 @@ const GameWrap = styled.div`
 
   .game_canvas {
     position: relative;
+    padding-top: 4rem;
     width: 100%;
     height: 100vh;
     ${flexCenter}
 
+    .game_info {
+      width: 100%;
+      max-width: 80rem;
+      ${absolute('50%', '2.4rem')};
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 3rem;
+
+      .key {
+        display: flex;
+        li {
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 4rem;
+          }
+        }
+      }
+    }
     canvas {
       max-width: 80rem;
       width: 100%;
       height: 85vh;
-      background: url(${bgImage}) no-repeat center/cover;
-    }
-
-    .score {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 3rem;
+      background: url(${imgBackground}) no-repeat center/cover;
     }
   }
 
-  .gameover,
-  .win {
+  .win,
+  .gameover {
     position: absolute;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+
+    h2 {
+      width: 100%;
+      max-width: 70rem;
+      height: 40rem;
+      background: url(${imgGameOver}) no-repeat center/ contain;
+      &.img_win {
+        background: url(${imgWin}) no-repeat center/ contain;
+      }
+    }
+
+    .win_score {
+      margin-top: 4rem;
+      font-size: 4rem;
+    }
+
+    .retry_btn {
+      margin-top: 4rem;
+      display: flex;
+      gap: 4rem;
+    }
   }
 `;
 
@@ -82,31 +131,14 @@ const OnlyPc = styled.div`
 export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
-  const [enemies, setEnemies] = useState<Enemy[]>([]);
-  const [bullets, setBullets] = useState<Bullet[]>([]);
-  const [keysArr, setKeysArr] = useState<string[]>([]);
-  const [rocketX, setRocketX] = useState(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
+  const bulletsRef = useRef<Bullet[]>([]);
+  const enemiesRef = useRef<Enemy[]>([]);
+  const keysArrRef = useRef<string[]>([]);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [gameWin, setGameWin] = useState(false);
+  const rocketXRef = useRef(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
   const rocketY = CANVAS_HEIGHT - ROCKET_SIZE;
-  const rocketXRef = useRef(rocketX);
-  const bulletsRef = useRef(bullets);
-  const enemiesRef = useRef(enemies);
-  const keysArrRef = useRef(keysArr);
-
-  useEffect(() => {
-    bulletsRef.current = bullets;
-  }, [bullets]);
-
-  useEffect(() => {
-    keysArrRef.current = keysArr;
-  }, [keysArr]);
-
-  useEffect(() => {
-    rocketXRef.current = rocketX;
-  }, [rocketX]);
-
-  useEffect(() => {
-    enemiesRef.current = enemies;
-  }, [enemies]);
 
   // 이미지 불러오기
   const loadImage = (src: string) => {
@@ -122,13 +154,10 @@ export default function Game() {
       0,
       ENEMY_SPEED
     );
-    setEnemies((prev) => {
-      const filterEnemies = prev
-        .filter((enemy) => enemy.y < CANVAS_HEIGHT) // 캔버스 밖으로 나가면 배열에서 삭제
-        .concat(newEnemy);
-
-      return filterEnemies;
-    });
+    enemiesRef.current = [
+      ...enemiesRef.current.filter((enemy) => enemy.y < CANVAS_HEIGHT),
+      newEnemy
+    ];
   };
 
   // 총알 추가
@@ -137,29 +166,28 @@ export default function Game() {
       rocketXRef.current,
       CANVAS_HEIGHT,
       BULLET_SPEED,
-      enemies,
-      enemiesRef.current
+      enemiesRef.current,
+      onUpdateScore
     );
-    setBullets((prev) => {
-      const filterBullets = prev
-        .filter((bullet) => bullet.y >= 0) // 캔버스 밖으로 나가면 배열에서 삭제
-        .concat(newBullet);
+    bulletsRef.current = [
+      ...bulletsRef.current.filter((bullet) => bullet.y >= 0),
+      newBullet
+    ];
+  };
 
-      return filterBullets;
-    });
+  // 점수 업데이트
+  const onUpdateScore = () => {
+    setScore((prev) => prev + 1);
   };
 
   const onKeyDown = (e: KeyboardEvent) => {
-    setKeysArr((prev) => {
-      if (!prev.includes(e.code)) {
-        return [...prev, e.code];
-      }
-      return prev; // 이미 포함된 키는 미반영
-    });
+    if (!keysArrRef.current.includes(e.code)) {
+      keysArrRef.current = [...keysArrRef.current, e.code];
+    }
   };
 
   const onKeyUp = (e: KeyboardEvent) => {
-    setKeysArr((prev) => prev.filter((key) => key !== e.code));
+    keysArrRef.current = keysArrRef.current.filter((key) => key !== e.code);
 
     if (e.code === 'Space') {
       addBullet();
@@ -171,20 +199,24 @@ export default function Game() {
     if (!ctx) return;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    const userRocket = loadImage(rocketImageSrc);
-    const enemyImage = loadImage(enemyImageSrc);
-    const bulletImage = loadImage(bulletSrc);
+    const userRocket = loadImage(imgMyRocket);
+    const enemyImage = loadImage(imgEnemy);
+    const bulletImage = loadImage(imgBullet);
 
     enemiesRef.current.forEach((enemy) => {
       enemy.update();
-      ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
+      if (enemy.alive) {
+        ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
+        if (enemy.gameOver) {
+          setGameOver(true);
+        }
+      }
     });
-    console.log(enemies);
 
     bulletsRef.current.forEach((bullet) => {
       if (bullet.alive) {
         bullet.update();
-        bullet.attack(setEnemies);
+        bullet.attack();
         ctx.drawImage(
           bulletImage,
           bullet.x,
@@ -204,6 +236,7 @@ export default function Game() {
     );
   };
 
+  // 캔버스 그리기
   useEffect(() => {
     if (canvasRef?.current) {
       const canvas = canvasRef.current;
@@ -212,29 +245,42 @@ export default function Game() {
       canvas.height = CANVAS_HEIGHT;
       setCtx(context);
     }
-  }, []);
 
-  // user rocket
+    const timer = setTimeout(() => {
+      if (!gameOver) {
+        setGameWin(true);
+      }
+    }, 60000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [gameOver]);
+
+  // game
   useEffect(() => {
     let lastEnemyTime = Date.now();
     let requestAnimationId: number;
 
     // 애니메이션 처리
     const onAnimation = () => {
+      if (gameOver || gameWin) {
+        return; // 게임오버
+      }
       if (Date.now() - lastEnemyTime >= 1000) {
         addEnemy();
         lastEnemyTime = Date.now(); // 적 생성되는 시간
       }
 
       if (keysArrRef.current.includes('ArrowLeft')) {
-        setRocketX((prev) => Math.max(prev - ROCKET_SPEED, 0)); // 왼쪽 경계선 체크
+        rocketXRef.current = Math.max(rocketXRef.current - ROCKET_SPEED, 0); // 왼쪽 경계선 체크
       }
       if (keysArrRef.current.includes('ArrowRight')) {
-        setRocketX((prev) =>
-          Math.min(prev + ROCKET_SPEED, CANVAS_WIDTH - ROCKET_SIZE)
+        rocketXRef.current = Math.min(
+          rocketXRef.current + ROCKET_SPEED,
+          CANVAS_WIDTH - ROCKET_SIZE
         ); // 오른쪽 경계선 체크
       }
-
       drawCanvas();
       requestAnimationId = window.requestAnimationFrame(onAnimation);
     };
@@ -250,25 +296,52 @@ export default function Game() {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('keyup', onKeyUp);
     };
-  }, [ctx]);
+  }, [ctx, gameOver, gameWin]);
 
   return (
     <GameWrap>
       <OnlyPc>모바일 해상도에서는 지원하지 않습니다.</OnlyPc>
       <div className='game_canvas'>
-        <p className='score main_font'>
-          SCORE: <span className='num'></span>
-        </p>
+        <div className='game_info sub_font'>
+          <p className='score main_font'>SCORE: {score}</p>
+
+          <ul className='key'>
+            <li>
+              <img src={imgKeyArrow} alt='키보드화살표' />
+              <p>: move</p>
+            </li>
+            <li>
+              <img src={imgKeySpace} alt='키보드스페이스' />
+              <p>: attack</p>
+            </li>
+          </ul>
+        </div>
         <canvas ref={canvasRef} className='canvas'></canvas>
       </div>
-      <div className='gameover'>
-        GAME OVER!
-        <button>REPLAY</button>
-      </div>
-      <div className='win'>
-        YOU WIN!
-        <button>REPLAY</button>
-      </div>
+      {gameOver && (
+        <div className='gameover'>
+          <h2 aria-label='gameover'></h2>
+
+          <div className='retry_btn'>
+            <Button text='REPLAY' onClick={() => window.location.reload()} />
+            <Button className='red' text='HOME'>
+              <Link to='/'></Link>
+            </Button>
+          </div>
+        </div>
+      )}
+      {gameWin && (
+        <div className='win'>
+          <h2 aria-label='win' className='img_win'></h2>
+          <div className='win_score main_font'>YOUR SCORE: {score}</div>
+          <div className='retry_btn'>
+            <Button text='REPLAY' onClick={() => window.location.reload()} />
+            <Button className='red' text='HOME'>
+              <Link to='/'></Link>
+            </Button>
+          </div>
+        </div>
+      )}
     </GameWrap>
   );
 }

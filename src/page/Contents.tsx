@@ -1,5 +1,6 @@
 import { breakTablet } from 'assets/style/common';
 import Glitter from 'components/Giltter';
+import Monster from 'components/Monster';
 import SubTitle from 'components/SubTitle';
 import Tag from 'components/Tag';
 import { Link } from 'react-router-dom';
@@ -42,6 +43,41 @@ const Wrap = styled.div`
   }
 `;
 
+const MonsterWrap = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  gap: 1rem;
+  animation: move 20s infinite linear;
+
+  .monster {
+    animation: moveReverse 20s infinite linear;
+  }
+
+  @keyframes move {
+    0% {
+      left: 0;
+    }
+    50% {
+      left: calc(100% - 42rem);
+    }
+    100% {
+      left: 0;
+    }
+  }
+  @keyframes moveReverse {
+    0%,
+    49.9% {
+      transform: scaleX(1);
+    }
+    50%,
+    100% {
+      transform: scaleX(-1);
+    }
+  }
+`;
+
 export default function Contents() {
   return (
     <Wrap>
@@ -50,7 +86,7 @@ export default function Contents() {
       <Glitter type='type2' left={6} top={24} />
       <Glitter type='type1' right={10} />
       <Glitter type='type1' right={5} top={25} />
-      <Glitter type='type5' left={10} top={20} />
+      <Glitter type='type3' left={10} top={20} />
       <ul>
         <li>
           <Link to='/about'>
@@ -91,6 +127,11 @@ export default function Contents() {
           </Link>
         </li>
       </ul>
+      <MonsterWrap>
+        <Monster />
+        <Monster />
+        <Monster />
+      </MonsterWrap>
     </Wrap>
   );
 }
