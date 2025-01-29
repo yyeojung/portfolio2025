@@ -46,17 +46,12 @@ html {
 }
 @media (max-width: 1080px) {
   html {
-    font-size: 50%;
+    font-size: 54.6875%;
   }
 }
 @media (max-width: 768px) {
   html {
-    font-size: 40%;
-  }
-}
-@media (max-width: 480px) {
-  html {
-    font-size: 30%;
+    font-size: 46.875%;
   }
 }
 html,
@@ -118,6 +113,7 @@ body {
   word-wrap: break-word;
   word-break: break-all;
   overflow-x: hidden;
+  cursor: url('./assets/image/cursor/cursor_default.png'), auto;
 }
 body.fixed {
   overflow-y: hidden;
@@ -196,6 +192,10 @@ button {
   color: inherit;
   background-color: transparent;
   font-weight: 400;
+}
+button,
+a {
+  cursor: url('./assets/image/cursor/cursor_hover.png'), pointer;
 }
 pre {
   white-space: -moz-pre-wrap;

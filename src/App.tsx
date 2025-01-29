@@ -10,6 +10,7 @@ import CompanyProject from 'page/CompanyProject';
 import ToyProject from 'page/ToyProject';
 import Menu from 'components/Menu';
 import Contact from 'page/Contact';
+import { breakMobile, breakTablet } from 'assets/style/common';
 
 const Wrap = styled.div`
   min-height: 100vh;
@@ -19,6 +20,13 @@ const Wrap = styled.div`
 
   &.sub_page {
     padding: 8rem;
+
+    @media (max-width: ${breakTablet}) {
+      padding: 8rem 6rem;
+    }
+    @media (max-width: ${breakMobile}) {
+      padding: 12rem 4rem;
+    }
   }
 `;
 
@@ -26,7 +34,7 @@ function App() {
   const { pathname } = useLocation();
   const notHome = pathname !== '/';
   return (
-    <Wrap className={notHome ? 'sub_page' : ''}>
+    <Wrap className={notHome && pathname !== '/game' ? 'sub_page' : ''}>
       <Menu notHome={notHome} />
       <Routes>
         <Route path='/' element={<Home />} />

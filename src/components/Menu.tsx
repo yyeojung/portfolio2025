@@ -8,6 +8,7 @@ const NavMenu = styled.div`
   position: absolute;
   top: 4rem;
   right: 4rem;
+  z-index: 20;
   .btn_menu {
     width: 6rem;
     height: 6rem;
@@ -167,7 +168,7 @@ export default function Menu({ notHome }: MenuProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={onClickLink} to='/top-project'>
+                  <Link onClick={onClickLink} to='/toy-project'>
                     TOY PROJECT <i>🛠️</i>
                   </Link>
                 </li>

@@ -11,6 +11,7 @@ import VioletBox from 'components/VioletBox';
 import Tag from 'components/Tag';
 import SubTitle from 'components/SubTitle';
 import { Link } from 'react-router-dom';
+import { breakMobile, breakTablet } from 'assets/style/common';
 
 const imgSize = 14.4;
 
@@ -28,7 +29,8 @@ const Contents = styled.div`
   justify-content: center;
   margin-top: 8rem;
   .violet_box {
-    width: 34rem;
+    width: 30%;
+    max-width: 34rem;
     min-height: 44rem;
     .tag {
       left: 50%;
@@ -73,13 +75,14 @@ const Contents = styled.div`
       border-radius: 2rem;
       padding: 1rem;
       width: 100%;
+      min-height: calc(100% - 20.4rem);
 
       .inner {
         width: 100%;
         border-radius: 2rem;
         padding: 1rem 4rem 1rem 1rem;
         border: 0.1rem solid #000;
-        min-height: 14rem;
+        min-height: 100%;
 
         &::before {
           position: absolute;
@@ -138,6 +141,22 @@ const Contents = styled.div`
     }
     100% {
       opacity: 0;
+    }
+  }
+
+  @media (max-width: ${breakTablet}) {
+    gap: 2rem;
+  }
+  @media (max-width: ${breakMobile}) {
+    gap: 8rem;
+    flex-direction: column;
+
+    .violet_box {
+      width: 100%;
+      max-width: 100%;
+      .box .inner {
+        min-height: 20rem;
+      }
     }
   }
 `;

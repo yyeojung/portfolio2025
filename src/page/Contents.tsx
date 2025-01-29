@@ -1,3 +1,4 @@
+import { breakTablet } from 'assets/style/common';
 import Glitter from 'components/Giltter';
 import SubTitle from 'components/SubTitle';
 import Tag from 'components/Tag';
@@ -15,6 +16,10 @@ const Wrap = styled.div`
     li {
       width: 33.3333%;
       text-align: center;
+
+      @media (max-width: ${breakTablet}) {
+        width: 50%;
+      }
 
       .tag {
         margin: auto;
@@ -42,10 +47,10 @@ export default function Contents() {
     <Wrap>
       <SubTitle text='CONTENTS' />
       <Link className='next_link' to='/about'></Link>
-      <Glitter type='type2' left={4} top={16} />
-      <Glitter type='type1' right={0} />
-      {/* <Glitter type='type1' />
-      <Glitter type='type5' bottom={10} /> */}
+      <Glitter type='type2' left={6} top={24} />
+      <Glitter type='type1' right={10} />
+      <Glitter type='type1' right={5} top={25} />
+      <Glitter type='type5' left={10} top={20} />
       <ul>
         <li>
           <Link to='/about'>

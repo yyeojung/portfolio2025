@@ -3,7 +3,7 @@ import bgImage from '../assets/image/game_background.jpg';
 import rocketImageSrc from '../assets/image/my_rocket.png';
 import enemyImageSrc from '../assets/image/rocket.png';
 import bulletSrc from '../assets/image/bullet.png';
-import { flexCenter } from 'assets/style/common';
+import { breakMobile, flexCenter } from 'assets/style/common';
 import { useEffect, useRef, useState } from 'react';
 import { Bullet, Enemy } from 'class/game';
 import {
@@ -57,6 +57,25 @@ const GameWrap = styled.div`
   .win {
     position: absolute;
     display: none;
+  }
+`;
+
+const OnlyPc = styled.div`
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+
+  @media (max-width: ${breakMobile}) {
+    display: flex;
+    word-break: keep-all;
+    text-align: center;
   }
 `;
 
@@ -235,6 +254,7 @@ export default function Game() {
 
   return (
     <GameWrap>
+      <OnlyPc>모바일 해상도에서는 지원하지 않습니다.</OnlyPc>
       <div className='game_canvas'>
         <p className='score main_font'>
           SCORE: <span className='num'></span>

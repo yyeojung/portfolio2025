@@ -83,7 +83,7 @@ export default function Glitter({
           className={
             type === 'type2'
               ? 'img6'
-              : (type === 'type3' ?? 'type6')
+              : type === 'type3' || type === 'type6'
                 ? 'img8'
                 : ''
           }

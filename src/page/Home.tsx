@@ -1,4 +1,4 @@
-import { breakPad, breakMobile, flexCenter } from 'assets/style/common';
+import { breakTablet, breakMobile, flexCenter } from 'assets/style/common';
 import Button from 'components/Button';
 import Monster from 'components/Monster';
 import ProgressBar from 'components/page/home/ProgressBar';
@@ -108,14 +108,6 @@ const Logo = styled.div`
     width: 80%;
     border-radius: 3rem;
     border: 0.5rem solid #fff;
-
-    @media (max-width: ${breakPad}) {
-      width: calc(100% - 8rem);
-      height: calc(100vh - 40rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
   }
 
   h1 {
@@ -124,15 +116,26 @@ const Logo = styled.div`
     margin-top: 4rem;
     line-height: 10rem;
     text-shadow: 0.7rem 0.6rem 0.2rem #d62c2f;
-
-    @media (max-width: ${breakMobile}) {
-      font-size: 10rem;
-    }
   }
 
   .progress {
     width: 80%;
     margin: 6rem auto 0;
+  }
+  @media (max-width: ${breakTablet}) {
+    .logo_wrap {
+      width: calc(100% - 8rem);
+      height: calc(100vh - 40rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: ${breakMobile}) {
+    h1 {
+      font-size: 10rem;
+    }
   }
 `;
 

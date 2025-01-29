@@ -5,8 +5,9 @@ import VioletBox from 'components/VioletBox';
 import lgdms from '../assets/image/lgdms.png';
 import highlearning from '../assets/image/highlearning.png';
 import { Link } from 'react-router-dom';
+import { breakTablet } from 'assets/style/common';
 
-const Wrap = styled.div`
+export const ProjectWrap = styled.div`
   .box_wrap {
     display: flex;
     margin-top: 10rem;
@@ -14,6 +15,10 @@ const Wrap = styled.div`
 
     .violet_box {
       width: calc((100% - 8rem) / 3);
+
+      a {
+        height: 100%;
+      }
     }
   }
 
@@ -23,18 +28,34 @@ const Wrap = styled.div`
       margin: -2rem 0 0 2rem;
     }
   }
+  @media (max-width: ${breakTablet}) {
+    .box_wrap {
+      flex-direction: column;
+      gap: 6rem;
+      margin-bottom: 4rem;
+      .violet_box {
+        width: 100%;
+      }
+    }
+    .title {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+      align-items: center;
+    }
+  }
 `;
 
 export default function CompanyProject() {
   return (
-    <Wrap>
+    <ProjectWrap>
       <Link className='next_link' to='/toy-project'></Link>
       <div className='title'>
         <Tag className='red ml_20' text='LEVEL 2' />
         <SubTitle className='sub' text='PROJECT' />
       </div>
       <div className='box_wrap'>
-        <VioletBox text='LGU+ DMS, CAS BO' link='https://www.google.com'>
+        <VioletBox text='LGU+ DMS BO' link='https://www.google.com'>
           <img src={lgdms} alt='lgdms' />
           <div className='mt_10 skill'>
             <span>vue.js</span>
@@ -70,6 +91,6 @@ export default function CompanyProject() {
           <p>설명~~</p>
         </VioletBox>
       </div>
-    </Wrap>
+    </ProjectWrap>
   );
 }

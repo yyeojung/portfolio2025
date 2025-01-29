@@ -1,74 +1,67 @@
 import SubTitle from 'components/SubTitle';
 import Tag from 'components/Tag';
-import styled from 'styled-components';
 import VioletBox from 'components/VioletBox';
-import lgdms from '../assets/image/lgdms.png';
-import highlearning from '../assets/image/highlearning.png';
+import imgBook from '../assets/image/toy_book.png';
+import imgCamping from '../assets/image/toy_camping.png';
+import imgTravel from '../assets/image/toy_travel.png';
 import { Link } from 'react-router-dom';
-
-const Wrap = styled.div`
-  .box_wrap {
-    display: flex;
-    margin-top: 10rem;
-    gap: 4rem;
-
-    .violet_box {
-      width: calc((100% - 8rem) / 3);
-    }
-  }
-  .title {
-    display: flex;
-    .sub {
-      margin: -2rem 0 0 2rem;
-    }
-  }
-`;
+import { ProjectWrap } from './CompanyProject';
 
 export default function CompanyProject() {
   return (
-    <Wrap>
+    <ProjectWrap>
       <Link className='next_link' to='/contact'></Link>
       <div className='title'>
-        <Tag className='red ml_20' text='LEVEL 2' />
+        <Tag className='red ml_20' text='LEVEL 3' />
         <SubTitle className='sub' text='TOY PROJECT' />
       </div>
       <div className='box_wrap'>
-        <VioletBox text='LGU+ DMS, CAS BO' link='https://www.google.com'>
-          <img src={lgdms} alt='lgdms' />
+        <VioletBox text='bookbook' link='https://www.google.com'>
+          <img src={imgBook} alt='북적북적' />
           <div className='mt_10 skill'>
-            <span>vue.js</span>
-            <span>bootstrap</span>
-            <span>tagify</span>
-            <span>v-calendar</span>
+            <span>React.js</span>
+            <span>typescript</span>
+            <span>react-select</span>
+            <span>zustand</span>
+            <span>react-datepicker</span>
           </div>
           <p className='mt_10'>
-            - 신규 프로젝트 vue.js 최초 도입
+            - 알라딘 API를 이용한 도서 검색,정보확인인
             <br />
-            - 공통 스타일 가이드 제작 및 구조 문서화
-            <br />- 반복적으로 사용되는 기능을 커스텀 훅으로 모듈화
+            - zustand로 상태 관리 및 railway 이용한 서버 배포
+            <br />- 독서량 차트로 표출
           </p>
         </VioletBox>
-        <VioletBox text='HIGHLEARNING' link='https://www.google.com'>
-          <img src={highlearning} alt='highlearning' />
+        <VioletBox text='goCamping' link='https://www.google.com'>
+          <img src={imgCamping} alt='고캠핑' />
           <div className='mt_10 skill'>
-            <span>html</span>
-            <span>css</span>
-            <span>jquery</span>
-            <span>chart.js</span>
+            <span>React.js</span>
+            <span>Next.js</span>
+            <span>typescript</span>
+            <span>firebase</span>
+            <span>ContextAPI</span>
           </div>
           <p className='mt_10'>
-            - 유지보수 및 고도화
+            - 고캠핑 API를 이용한 캠핑장 검색 기능
             <br />
-            - 학습 내용과 결과를 알 수 있는 리포트의 차트 디자인, 기능 전반적인
-            변경
-            <br />- 고도화시 추가되는 신규 기능 구현 및 설명
+            - 커스텀 훅으로 모달창 관리
+            <br />- firebase 이용한 서버 관리
           </p>
         </VioletBox>
-        <VioletBox text='HELLO' link='https://www.google.com'>
-          <img src={highlearning} alt='highlearning' />
-          <p>설명~~</p>
+        <VioletBox text='travel pocket' link='https://www.google.com'>
+          <img src={imgTravel} alt='트레블 포켓' />
+          <div className='mt_10 skill'>
+            <span>React.js</span>
+            <span>Styled-component</span>
+            <span>react-datepicker</span>
+          </div>
+          <p className='mt_10'>
+            - 테마 모드 설정 <br />
+            - 환율, 여행 기간 계산
+            <br />- 여행지별 가계부 생성
+          </p>
         </VioletBox>
       </div>
-    </Wrap>
+    </ProjectWrap>
   );
 }

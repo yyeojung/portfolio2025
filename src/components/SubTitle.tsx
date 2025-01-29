@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import TextPlugin from 'gsap/TextPlugin';
+import { breakMobile, breakTablet } from 'assets/style/common';
 
 gsap.registerPlugin(TextPlugin);
 const Title = styled.h1`
@@ -14,6 +15,13 @@ const Title = styled.h1`
   padding-bottom: 2rem;
   word-break: break-word;
   line-height: 11rem;
+
+  @media (max-width: ${breakTablet}) {
+    font-size: 12rem;
+  }
+  @media (max-width: ${breakMobile}) {
+    font-size: 8rem;
+  }
 
   &.sub {
     margin-top: 2rem;
