@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import imgMenu from '../assets/image/icon_menu.svg';
 import imgClose from '../assets/image/icon_close.svg';
 import styled from 'styled-components';
+import { absolute, breakMobile } from 'assets/style/common';
 
 const NavMenu = styled.div`
-  position: absolute;
-  top: 4rem;
+  ${absolute('auto', '4rem')};
   right: 4rem;
   z-index: 20;
   .btn_menu {
@@ -67,6 +67,14 @@ const NavMenu = styled.div`
           }
         }
       }
+    }
+  }
+  @media (max-width: ${breakMobile}) {
+    ${absolute('auto', '4rem')};
+    right: 2rem;
+    .btn_menu {
+      width: 4rem;
+      height: 4rem;
     }
   }
 

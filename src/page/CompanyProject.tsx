@@ -52,7 +52,10 @@ export default function CompanyProject() {
         <SubTitle text='PROJECT' />
       </div>
       <div className='box_wrap'>
-        <VioletBox text='LGU+ DMS BO' link='https://www.google.com'>
+        <VioletBox
+          text='LGU+ DMS BO'
+          link='https://distinct-feels-7f8.notion.site/LG-14612ba7456480ea9e99e8122b5d78ec?pvs=74'
+        >
           <img src={lgdms} alt='lgdms' />
           <div className='mt_10 skill'>
             <span>vue.js</span>
@@ -67,7 +70,10 @@ export default function CompanyProject() {
             <br />- 반복적으로 사용되는 기능을 커스텀 훅으로 모듈화
           </p>
         </VioletBox>
-        <VioletBox text='HIGHLEARNING' link='https://www.google.com'>
+        <VioletBox
+          text='HIGHLEARNING'
+          link='https://distinct-feels-7f8.notion.site/627afaf21bba42b0bbd7847b10e847dc?pvs=74'
+        >
           <img src={highlearning} alt='highlearning' />
           <div className='mt_10 skill'>
             <span>html</span>

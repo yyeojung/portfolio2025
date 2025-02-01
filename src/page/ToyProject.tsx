@@ -16,7 +16,10 @@ export default function CompanyProject() {
         <SubTitle text='TOY PROJECT' />
       </div>
       <div className='box_wrap'>
-        <VioletBox text='bookbook' link='https://www.google.com'>
+        <VioletBox
+          text='bookbook'
+          link='https://distinct-feels-7f8.notion.site/17b12ba745648096b776cab1e13cb53b'
+        >
           <img src={imgBook} alt='북적북적' />
           <div className='mt_10 skill'>
             <span>React.js</span>
@@ -32,7 +35,10 @@ export default function CompanyProject() {
             <br />- 독서량 차트로 표출
           </p>
         </VioletBox>
-        <VioletBox text='goCamping' link='https://www.google.com'>
+        <VioletBox
+          text='dayily Camping'
+          link='https://distinct-feels-7f8.notion.site/bd8341f206ff4bb387c4df2fa3705d96'
+        >
           <img src={imgCamping} alt='고캠핑' />
           <div className='mt_10 skill'>
             <span>React.js</span>
@@ -48,7 +54,10 @@ export default function CompanyProject() {
             <br />- firebase 이용한 서버 관리
           </p>
         </VioletBox>
-        <VioletBox text='travel pocket' link='https://www.google.com'>
+        <VioletBox
+          text='travel pocket'
+          link='https://distinct-feels-7f8.notion.site/b124368120ca4dacb72f61b7e56129bb'
+        >
           <img src={imgTravel} alt='트레블 포켓' />
           <div className='mt_10 skill'>
             <span>React.js</span>
