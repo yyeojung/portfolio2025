@@ -18,9 +18,11 @@ const Title = styled.h1`
 
   @media (max-width: ${breakTablet}) {
     font-size: 12rem;
+    line-height: 9rem;
   }
   @media (max-width: ${breakMobile}) {
-    font-size: 8rem;
+    font-size: 7rem;
+    line-height: 6rem;
   }
 
   &.sub {
@@ -44,5 +46,7 @@ export default function SubTitle({ text, className }: SubTitle) {
       delay: 0
     });
   }, []);
-  return <Title ref={titleRef} className={`main_font ${className}`}></Title>;
+  return (
+    <Title ref={titleRef} className={`main_font ${className || ''}`}></Title>
+  );
 }

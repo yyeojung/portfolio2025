@@ -163,6 +163,11 @@ export default function Menu({ notHome }: MenuProps) {
                   </Link>
                 </li>
                 <li>
+                  <Link onClick={onClickLink} to='/about'>
+                    ABOUT <i>🙋🏻‍♀️</i>
+                  </Link>
+                </li>
+                <li>
                   <Link onClick={onClickLink} to='/company-project'>
                     COMPANY PROJECT <i>🏢</i>
                   </Link>

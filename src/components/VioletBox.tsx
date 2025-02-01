@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 import Tag from './Tag';
 import { ReactNode } from 'react';
-import { customBoxShadow } from 'assets/style/common';
+import { absolute, breakMobile, customBoxShadow } from 'assets/style/common';
 
 const Wrap = styled.div`
   position: relative;
 
   .tag {
-    position: absolute;
-    top: -3rem;
-    left: -2rem;
+    ${absolute('-2rem', '-3rem')}
     z-index: 10;
+    @media (max-width: ${breakMobile}) {
+      ${absolute('50%', '-3rem')}
+    }
   }
   .contents {
     display: block;
@@ -71,7 +72,7 @@ export default function VioletBox({
   link
 }: BoxProps) {
   return (
-    <Wrap className={`violet_box ${className}`}>
+    <Wrap className={`violet_box ${className || ''}`}>
       <Tag className='yellow' text={text} />
       {link ? (
         <a

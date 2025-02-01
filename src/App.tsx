@@ -25,7 +25,7 @@ const Wrap = styled.div`
       padding: 8rem 6rem;
     }
     @media (max-width: ${breakMobile}) {
-      padding: 12rem 4rem;
+      padding: 12rem 2rem;
     }
   }
 `;

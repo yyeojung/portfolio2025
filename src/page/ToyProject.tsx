@@ -13,7 +13,7 @@ export default function CompanyProject() {
       <Link className='next_link' to='/contact'></Link>
       <div className='title'>
         <Tag className='red ml_20' text='LEVEL 3' />
-        <SubTitle className='sub' text='TOY PROJECT' />
+        <SubTitle text='TOY PROJECT' />
       </div>
       <div className='box_wrap'>
         <VioletBox text='bookbook' link='https://www.google.com'>

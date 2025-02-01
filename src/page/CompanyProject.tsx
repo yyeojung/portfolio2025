@@ -24,9 +24,6 @@ export const ProjectWrap = styled.div`
 
   .title {
     display: flex;
-    .sub {
-      margin: -2rem 0 0 2rem;
-    }
   }
   @media (max-width: ${breakTablet}) {
     .box_wrap {
@@ -52,7 +49,7 @@ export default function CompanyProject() {
       <Link className='next_link' to='/toy-project'></Link>
       <div className='title'>
         <Tag className='red ml_20' text='LEVEL 2' />
-        <SubTitle className='sub' text='PROJECT' />
+        <SubTitle text='PROJECT' />
       </div>
       <div className='box_wrap'>
         <VioletBox text='LGU+ DMS BO' link='https://www.google.com'>

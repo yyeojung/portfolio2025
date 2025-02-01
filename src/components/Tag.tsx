@@ -32,5 +32,7 @@ interface TagProps {
 }
 
 export default function Tag({ text, className }: TagProps) {
-  return <CustomTag className={`main_font tag ${className}`}>{text}</CustomTag>;
+  return (
+    <CustomTag className={`main_font tag ${className || ''}`}>{text}</CustomTag>
+  );
 }
