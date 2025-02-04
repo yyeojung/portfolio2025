@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/portfolio2025/static/css/main.ef1e055a.css",
+    "main.js": "/portfolio2025/static/js/main.6d860074.js",
+    "static/js/453.af72e82d.chunk.js": "/portfolio2025/static/js/453.af72e82d.chunk.js",
+    "static/media/toy_camping.png": "/portfolio2025/static/media/toy_camping.39bc0f76c1ae9dd5fc58.png",
+    "static/media/toy_book.png": "/portfolio2025/static/media/toy_book.5bfbae88abcce13733d0.png",
+    "static/media/NotoSans-SemiBold.ttf": "/portfolio2025/static/media/NotoSans-SemiBold.99a8e0ebadf5af4c5e3d.ttf",
+    "static/media/NotoSans-Bold.ttf": "/portfolio2025/static/media/NotoSans-Bold.27d083f7f844fb896ae7.ttf",
+    "static/media/NotoSans-ExtraLight.ttf": "/portfolio2025/static/media/NotoSans-ExtraLight.592ad4f4cb828e502095.ttf",
+    "static/media/NotoSans-Regular.ttf": "/portfolio2025/static/media/NotoSans-Regular.9ab05beb031b68562995.ttf",
+    "static/media/highlearning.png": "/portfolio2025/static/media/highlearning.4b4fa77d32b89bb0b018.png",
+    "static/media/tugboat.png": "/portfolio2025/static/media/tugboat.eb10e48303da6c923545.png",
+    "static/media/lgdms.png": "/portfolio2025/static/media/lgdms.be76295deadd1b56cfbb.png",
+    "static/media/toy_travel.png": "/portfolio2025/static/media/toy_travel.4c4a2ef7ba64184671d8.png",
+    "static/media/game_background.jpg": "/portfolio2025/static/media/game_background.c3bda62c510d638d811e.jpg",
+    "static/media/gameover.png": "/portfolio2025/static/media/gameover.e81ae55fb356ed2fe692.png",
+    "static/media/logo_tistory.png": "/portfolio2025/static/media/logo_tistory.d004f6acff57da43e0da.png",
+    "static/media/background.png": "/portfolio2025/static/media/background.85666fbe0f09d938d089.png",
+    "static/media/Geo-Regular.ttf": "/portfolio2025/static/media/Geo-Regular.9072e0f22e59d0929baf.ttf",
+    "static/media/Silkscreen-Regular.ttf": "/portfolio2025/static/media/Silkscreen-Regular.e7e896209cf39b6670df.ttf",
+    "static/media/Silkscreen-Bold.ttf": "/portfolio2025/static/media/Silkscreen-Bold.825ce81561a1da06cb49.ttf",
+    "static/media/logo_notion.png": "/portfolio2025/static/media/logo_notion.35f5f4c2ffc2f081d2cc.png",
+    "index.html": "/portfolio2025/index.html",
+    "static/media/icon_close.svg": "/portfolio2025/static/media/icon_close.a22aba4aa989d6f8ea7a68d023e9d669.svg",
+    "static/media/icon_menu.svg": "/portfolio2025/static/media/icon_menu.e31297865fc8b935b38975aa3ce6ae64.svg",
+    "static/media/arrow.svg": "/portfolio2025/static/media/arrow.cca9684c5a711bac47cb.svg",
+    "static/media/pixel_arrow.svg": "/portfolio2025/static/media/pixel_arrow.ae38a8aec6e6ef0640fa32040398a17d.svg",
+    "main.ef1e055a.css.map": "/portfolio2025/static/css/main.ef1e055a.css.map",
+    "main.6d860074.js.map": "/portfolio2025/static/js/main.6d860074.js.map",
+    "453.af72e82d.chunk.js.map": "/portfolio2025/static/js/453.af72e82d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef1e055a.css",
+    "static/js/main.6d860074.js"
+  ]
+}
