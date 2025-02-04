@@ -134,10 +134,10 @@ export default function Game() {
   const bulletsRef = useRef<Bullet[]>([]);
   const enemiesRef = useRef<Enemy[]>([]);
   const keysArrRef = useRef<string[]>([]);
+  const rocketXRef = useRef(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [gameWin, setGameWin] = useState(false);
-  const rocketXRef = useRef(CANVAS_WIDTH / 2 - ROCKET_SIZE / 2);
   const rocketY = CANVAS_HEIGHT - ROCKET_SIZE;
 
   // 이미지 불러오기
@@ -166,7 +166,7 @@ export default function Game() {
       rocketXRef.current,
       CANVAS_HEIGHT,
       BULLET_SPEED,
-      enemiesRef.current,
+      enemiesRef,
       onUpdateScore
     );
     bulletsRef.current = [
@@ -204,8 +204,8 @@ export default function Game() {
     const bulletImage = loadImage(imgBullet);
 
     enemiesRef.current.forEach((enemy) => {
-      enemy.update();
       if (enemy.alive) {
+        enemy.update();
         ctx.drawImage(enemyImage, enemy.x, enemy.y, ENEMY_SIZE, ENEMY_SIZE);
         if (enemy.gameOver) {
           setGameOver(true);

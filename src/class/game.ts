@@ -38,7 +38,7 @@ export class Enemy extends Moving {
 }
 
 export class Bullet extends Moving {
-  enemiesRef: Enemy[];
+  enemiesRef: React.MutableRefObject<Enemy[]>;
   alive: boolean;
   onUpdateScore: () => void;
 
@@ -46,7 +46,7 @@ export class Bullet extends Moving {
     x: number,
     y: number,
     speed: number,
-    enemiesRef: Enemy[],
+    enemiesRef: React.MutableRefObject<Enemy[]>,
     onUpdateScore: () => void
   ) {
     super(x, y, speed);
@@ -61,8 +61,8 @@ export class Bullet extends Moving {
 
   attack() {
     if (!this.alive) return;
-    for (let i = 0; i < this.enemiesRef.length; i++) {
-      const enemy = this.enemiesRef[i];
+    for (let i = 0; i < this.enemiesRef.current.length; i++) {
+      const enemy = this.enemiesRef.current[i];
 
       if (enemy.alive) {
         if (
@@ -74,7 +74,9 @@ export class Bullet extends Moving {
         ) {
           this.alive = false;
           enemy.alive = false;
-          this.enemiesRef = this.enemiesRef.filter((e) => e.alive);
+          this.enemiesRef.current = this.enemiesRef.current.filter(
+            (e) => e.alive
+          );
           this.onUpdateScore();
         }
       }

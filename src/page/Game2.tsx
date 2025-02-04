@@ -139,7 +139,7 @@ export default function Game() {
       CANVAS_HEIGHT,
       BULLET_SPEED,
       // enemies,
-      enemiesRef.current,
+      enemiesRef,
       onUpdateScore
     );
     setBullets((prev) => {

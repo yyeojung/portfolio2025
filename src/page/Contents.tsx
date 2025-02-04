@@ -18,10 +18,10 @@ const Wrap = styled.div`
       width: 33.3333%;
       text-align: center;
 
-      @media (max-width: ${breakTablet}) {
-        width: 50%;
+      a {
+        display: block;
+        height: 100%;
       }
-
       .tag {
         margin: auto;
       }
@@ -39,6 +39,11 @@ const Wrap = styled.div`
         font-weight: 700;
         text-shadow: var(--textShadow);
       }
+    }
+  }
+  @media (max-width: ${breakTablet}) {
+    li {
+      width: 50%;
     }
   }
 `;

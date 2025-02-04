@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import VioletBox from 'components/VioletBox';
 import lgdms from '../assets/image/lgdms.png';
 import highlearning from '../assets/image/highlearning.png';
+import tugboat from '../assets/image/tugboat.png';
 import { Link } from 'react-router-dom';
 import { breakTablet } from 'assets/style/common';
 
@@ -89,9 +90,22 @@ export default function CompanyProject() {
             <br />- 고도화시 추가되는 신규 기능 구현 및 설명
           </p>
         </VioletBox>
-        <VioletBox text='HELLO' link='https://www.google.com'>
-          <img src={highlearning} alt='highlearning' />
-          <p>설명~~</p>
+        <VioletBox
+          text='tugboat'
+          link='https://distinct-feels-7f8.notion.site/be734e06eca44b0bac77d84ed8cff61d'
+        >
+          <img src={tugboat} alt='tugboat' />
+          <div className='mt_10 skill'>
+            <span>html</span>
+            <span>css</span>
+            <span>jquery</span>
+            <span>chart.js</span>
+          </div>
+          <p className='mt_10'>
+            - 신규 프로젝트
+            <br />- chart.js로 다양한 데이터 가시화
+            <br /> - 라이트모드, 다크모드 생성
+          </p>
         </VioletBox>
       </div>
     </ProjectWrap>
