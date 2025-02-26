@@ -125,7 +125,7 @@ const Logo = styled.div`
   @media (max-width: ${breakTablet}) {
     .logo_wrap {
       width: calc(100% - 8rem);
-      height: calc(100vh - 40rem);
+      height: calc(100vh - 16rem);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -134,7 +134,9 @@ const Logo = styled.div`
 
   @media (max-width: ${breakMobile}) {
     h1 {
-      font-size: 10rem;
+      font-size: 6rem;
+      margin-top: 1rem;
+      line-height: 8rem;
     }
   }
 `;
@@ -168,6 +170,12 @@ const MonsterWrap = styled.div`
     50%,
     100% {
       transform: scaleX(-1);
+    }
+  }
+  @media (max-width: ${breakTablet}) {
+    gap: 2rem;
+    .monster .pac .ghost {
+      height: 5rem;
     }
   }
 `;
